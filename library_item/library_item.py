@@ -14,9 +14,9 @@ class LibraryItem:
 
     args:
 
-        title (str): name of items
-        author (str): name of writer or author
-        genre (Genre): type of the item that it belongs to
+        title (str): The title of the library item
+        author (str): The author of the library item
+        genre (Genre): The genre of the library item
 
     """
 
@@ -36,6 +36,18 @@ class LibraryItem:
             self.__genre = genre
         else:
             raise ValueError("Invalid Genre") # prints a message if genre is invalid
+        
+    @property # defining an accessor
+    def title(self) -> str: # made public
+        return self.__title
+    
+    @property # defining an accessor
+    def author(self) -> str: # made public
+        return self.__author
+    
+    @property # defining an accessor
+    def genre(self) -> Genre:
+        return self.__genre # made public
         
 
         
