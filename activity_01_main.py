@@ -6,6 +6,8 @@ __author__ = "ACE Faculty"
 __version__ = "1.0.0"
 __credits__ = ""
 
+from library_item.library_item import LibraryItem
+from genre.genre import Genre
 
 def main():
     """Test the functionality of the methods encapsulated 
@@ -17,6 +19,11 @@ def main():
 
     # 1. Code a statement which creates an instance of the LibraryItem class with valid inputs.
     # Use your own unique valid values for the inputs to the class.
+    try: 
+        library_item = LibraryItem("ISD", "Michael", Genre.FANTASY)
+        print(library_item)
+    except ValueError as e:
+        print(e)
 
 
     # 2. Using the instance defined above, and the class Accessors, print 
