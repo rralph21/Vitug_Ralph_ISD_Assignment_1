@@ -7,7 +7,7 @@ This activity will help to reinforce learning of the Module 1 concepts of:
 - Unit Test Planning
 
 ## Author
-[Your name]
+Ralph Vitug
 
 ## Additional Information
-[ Use this space to include additional information that may help in your learning. ]
+This activity will go over the basic principles of Encapsulation, Classes and unit testing. As well as executing Class diagrams.
