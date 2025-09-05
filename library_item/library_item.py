@@ -53,6 +53,6 @@ class LibraryItem:
     def __str__(self) -> str: # prints in string form the title, author and genre.
         return (f"Title: {self.__title}"
         + f"\nAuthor: {self.__author}"
-        + f"\nGenre: {self.__genre}")
+        + f"\nGenre: {self.__genre.name}")
 
      
