@@ -17,6 +17,8 @@ class LibraryItem:
         title (str): The title of the library item
         author (str): The author of the library item
         genre (Genre): The genre of the library item
+        Is_borrow (bool): status of the item from the library
+        Item_id (Int): Identification Number of the item from the library
 
     """
 
