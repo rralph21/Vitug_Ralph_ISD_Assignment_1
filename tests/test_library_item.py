@@ -16,11 +16,11 @@ class TestClient(unittest.TestCase): # initializing class of testclient
 
     def setUp(self):
         # runs before test to reduce code redundancy
-        self.library = LibraryItem("ISD", "Michael", Genre.FANTASY)
+        self.library = LibraryItem("ISD", "Michael", Genre.FANTASY, True, 1234)
 
     def test_init_valid(self): 
         # Arrange & Act
-        library = LibraryItem("ISD", "Michael", Genre.FANTASY) # object attributes
+        library = LibraryItem("ISD", "Michael", Genre.FANTASY, True, 1234) # object attributes
 
         # Assert
         self.assertEqual("ISD", library._LibraryItem__title) # testing validity of title

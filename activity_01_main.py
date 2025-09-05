@@ -20,7 +20,7 @@ def main():
     # 1. Code a statement which creates an instance of the LibraryItem class with valid inputs.
     # Use your own unique valid values for the inputs to the class.
     try: 
-        library_item = LibraryItem("ISD", "Michael", Genre.FANTASY)
+        library_item = LibraryItem("ISD", "Michael", Genre.FANTASY, True, 1234)
     except ValueError as e:
         print(e)
 
@@ -31,6 +31,8 @@ def main():
         print("Title: ", library_item.title)
         print("Author: ", library_item.author)
         print("Genre: ", library_item.genre.name)
+        print("Borrowed: ", library_item.is_borrowed)
+        print("Item ID: ", library_item.item_id)
 
     except ValueError as e:
         print(e)
@@ -39,7 +41,7 @@ def main():
     # 3. Code a statement which creates an instance of the LibraryItem class with one or more invalid inputs.
     # Use your own unique valid values for the inputs to the class.
     try:
-        invalid_item = LibraryItem("ISD", " ", " ")
+        invalid_item = LibraryItem("ISD", " ", " ", True, 1234)
         print(invalid_item)
     except ValueError as e:
         print(e)
