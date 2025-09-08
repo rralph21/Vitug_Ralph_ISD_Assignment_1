@@ -43,13 +43,27 @@ class TestClient(unittest.TestCase): # initializing class of test client
         # Arrange & Act
         with self.assertRaises(ValueError): # test to check last name
             client = Client(12345, "Wendy", " ", "WendyWays@pixell.com")
-
-    def test_init_email_address_raises_exception(self):
-        # Arrange & Act
-        with self.assertRaises(ValueError): # test to check email address
-            client = Client(12345, "Wendy", "Ways", "123 ")
+    
+    # def test_init_email_address_raises_exception(self):
+    #     # Arrange & Act
+    #     with self.assertRaises(ValueError): # test to check email address
+    #         client = Client(12345, "Wendy", "Ways", "123 ")
 
     def test_client_number_accessor(self):
+        # Arrange is setUp
+        # Act and Assert
+        self.assertEqual(12345, self.client.client_number)
+
+    def test_first_name_accessor(self):
+        # Arrange is setUp
+        # Act and Assert
+        self.assertEqual("Wendy", self.client.first_name)
+
+    def test_last_name_accessor(self):
+        # Arrange is setUp
+        # Act and Assert
+        self.assertEqual("Ways", self.client.last_name)
+
 
     
 

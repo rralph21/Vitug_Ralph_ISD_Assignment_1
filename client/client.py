@@ -1,6 +1,7 @@
 __author__ = "Ralph Vitug"
 __version__ = "ISD 2.0.0"
 
+
 class Client: # initialing a class Client
     """
     
@@ -41,26 +42,27 @@ class Client: # initialing a class Client
             self.__email_address = email_address
         
 
-        @property # defining an accessor
-        def client_number(self) -> int: # made public
-            return self.__client_number
+    @property # defining an accessor
+    def client_number(self) -> int: # made public
+        return self.__client_number
         
-        @property # defining an accessor
-        def first_name(self) -> str: # made public
-            return self.__first_name
+    @property # defining an accessor
+    def first_name(self) -> str: # made public
+        return self.__first_name
         
-        @property # defining an accessor
-        def last_name(self) -> str: # made public
-            return self.__last_name
+    @property # defining an accessor
+    def last_name(self) -> str: # made public
+        return self.__last_name
         
-        @property # defining an accessor
-        def email_address(self) -> str: # made public
-            return self.__email_address
+    @property # defining an accessor
+    def email_address(self) -> str: # made public
+        return self.__email_address
         
-        def __str__(self) -> str: # prints in string form of the last name,
+    def __str__(self) -> str: # prints in string form of the last name,
                                 # last name, client number and email address
             
-            return (f"Last name: {self.__last_name}"
-                    + f"First name: {self.__first_name}"
-                    + f"Client number: {self.__client_number}"
-                    + f"Email address: {self.__email_address}")
+        return (f"Last name: {self.__last_name}"
+                + f"First name: {self.__first_name}"
+                + f"Client number: [{self.__client_number}]"
+                + f"Email address: {self.__email_address}")
+        
