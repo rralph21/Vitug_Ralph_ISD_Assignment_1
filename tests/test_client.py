@@ -15,6 +15,10 @@ from client.client import Client
 
 class TestClient(unittest.TestCase): # initializing class of test client
 
+    def setUp(self):
+        # runs before test to reduce code redundancy
+        self.client = Client(12345, "Wendy", "Ways", "WendyWays@pixell.com")
+
     def test_init_valid(self):
         # Arrange & Act
         client = Client(12345, "Wendy", "Ways", "WendyWays@pixell.com")
@@ -28,6 +32,26 @@ class TestClient(unittest.TestCase): # initializing class of test client
     def test_init_client_number_raises_exception(self): # test to check client number
         # Arrange & Act
         with self.assertRaises(ValueError):
-            client = Client(12345, "Wendy", "Ways", "WendyWays@pixell.com")
+            client = Client("hello world", "Wendy", "Ways", "WendyWays@pixell.com")
+
+    def test_init_first_name_raises_exception(self):
+        # Arrange & Act
+        with self.assertRaises(ValueError): # test to check first name
+            client = Client(12345, " ", "Ways", "WendyWays@pixell.com")
+
+    def test_init_last_name_raises_exception(self):
+        # Arrange & Act
+        with self.assertRaises(ValueError): # test to check last name
+            client = Client(12345, "Wendy", " ", "WendyWays@pixell.com")
+
+    def test_init_email_address_raises_exception(self):
+        # Arrange & Act
+        with self.assertRaises(ValueError): # test to check email address
+            client = Client(12345, "Wendy", "Ways", "123 ")
+
+    def test_client_number_accessor(self):
+
+    
+
 
 
