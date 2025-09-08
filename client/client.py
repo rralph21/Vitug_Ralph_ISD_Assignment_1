@@ -42,19 +42,19 @@ class Client: # initialing a class Client
         
 
         @property # defining an accessor
-        def client_number(self) -> int:
+        def client_number(self) -> int: # made public
             return self.__client_number
         
         @property # defining an accessor
-        def first_name(self) -> str:
+        def first_name(self) -> str: # made public
             return self.__first_name
         
         @property # defining an accessor
-        def last_name(self) -> str:
+        def last_name(self) -> str: # made public
             return self.__last_name
         
         @property # defining an accessor
-        def email_address(self) -> str:
+        def email_address(self) -> str: # made public
             return self.__email_address
         
         def __str__(self) -> str: # prints in string form of the last name,
