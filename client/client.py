@@ -2,6 +2,8 @@ __author__ = "Ralph Vitug"
 __version__ = "ISD 2.0.0"
 
 
+from email_validator import validate_email, EmailNotValidError
+
 class Client: # initialing a class Client
     """
     
@@ -37,9 +39,17 @@ class Client: # initialing a class Client
         else:
             raise ValueError("Last name cannot be blank")
             # raises value error if last name is blank
-        
-        if len(email_address.strip())> 0: # checks the validity of email address
+
+        try: # email validation block is invoke in a try and except block
+            validated_email = validate_email(email_address, check_deliverability=False)
+             # email validation
+             # check_deliverability set to false to avoid delay
             self.__email_address = email_address
+        
+        except EmailNotValidError:
+            self.__email_address = "email@pixell-river.com"
+            # setting email attribute as required
+            
         
 
     @property # defining an accessor
@@ -61,8 +71,5 @@ class Client: # initialing a class Client
     def __str__(self) -> str: # prints in string form of the last name,
                                 # last name, client number and email address
             
-        return (f"Last name: {self.__last_name}"
-                + f"First name: {self.__first_name}"
-                + f"Client number: [{self.__client_number}]"
-                + f"Email address: {self.__email_address}")
+        return f"{self.__last_name}, {self.__first_name} [{self.__client_number}] - {self.__email_address}"
         
