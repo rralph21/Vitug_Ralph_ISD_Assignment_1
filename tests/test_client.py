@@ -25,10 +25,10 @@ class TestClient(unittest.TestCase): # initializing class of test client
         client = Client(12345, "Wendy", "Ways", "WendyWays@pixell-river.com")
 
         # Assert
-        self.assertEqual(12345, client._Client__client_number) # testing client number if valid
-        self.assertEqual("Wendy", client._Client__first_name) # testing first name if valid
-        self.assertEqual("Ways", client._Client__last_name) # testing lst name if valid
-        self.assertEqual("WendyWays@pixell-river.com", client._Client__email_address) # testing email address if valid
+        self.assertEqual(12345, client._Client__client_number) 
+        self.assertEqual("Wendy", client._Client__first_name) 
+        self.assertEqual("Ways", client._Client__last_name) 
+        self.assertEqual("WendyWays@pixell-river.com", client._Client__email_address) 
 
     def test_init_client_number_raises_exception(self): # test to check client number
         # Arrange & Act
@@ -37,24 +37,13 @@ class TestClient(unittest.TestCase): # initializing class of test client
 
     def test_init_first_name_raises_exception(self):
         # Arrange & Act
-        with self.assertRaises(ValueError): # test to check first name
+        with self.assertRaises(ValueError): 
             client = Client(12345, " ", "Ways", "WendyWays@pixell-river.com")
 
     def test_init_last_name_raises_exception(self):
         # Arrange & Act
-        with self.assertRaises(ValueError): # test to check last name
+        with self.assertRaises(ValueError): 
             client = Client(12345, "Wendy", " ", "WendyWays@pixell-river.com")
-
-    # def test_invalid_email_sets_default(self):
-    #     # Arrange & Act
-    #     # client = Client(12345, "Wendy", "Ways", "not-an-email")  # purposely invalid
-
-    #     with self.assertRaises(EmailNotValidError):
-    #         Client(12345, "Wendy", "Ways", "not-an-email")
-
-        # Assert
-        # default attribute when invalid email is inputed
-        # self.assertEqual("email@pixell-river.com", client._Client__email_address) 
 
     def test_invalid_email_address(self):
         # Test invalid email address
