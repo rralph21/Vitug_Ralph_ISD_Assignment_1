@@ -1,5 +1,5 @@
 __author__ = "Ralph Vitug"
-__version__ = "ISD 3.0.2"
+__version__ = "ISD 3.1.0"
 
 
 class BankAccount: # initialing a class Client
@@ -93,5 +93,36 @@ class BankAccount: # initialing a class Client
             raise ValueError(f"Deposit amount: {validated} must be positive.")
 
         self.update_balance(amount)
+
+
+    def withdraw(self, amount: float) -> None:
+        """
+        Withdraws a positive amount if sufficient balance exists.
+        Raises ValueError if amount is invalid, not positive, or exceeds balance.
+
+        args:
+            amount (float): A float value representing 
+            the withdrawal amount.
+        """
+        
+        try:
+            amount = float(amount)
+        except (ValueError):
+            raise ValueError(f"Withdraw amount: {amount} must be numeric.")
+
+       
+        if amount <= 0:
+            validated = f"${amount:,.2f}"
+            raise ValueError(f"Withdraw amount: {validated} must be positive.")
+
+        
+        if amount > self.__balance:
+            validated_amt = f"${amount:,.2f}"
+            validated_bal = f"${self.__balance:,.2f}"
+            raise ValueError(
+                f"Withdraw amount: {validated_amt} must not exceed the account balance: {validated_bal}."
+            )
+
+        self.update_balance(-amount)
 
     
