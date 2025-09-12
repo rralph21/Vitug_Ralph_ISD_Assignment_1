@@ -29,15 +29,15 @@ class BankAccount: # initialing a class Client
 
         else:
             raise ValueError("The account number must be a numerical form")
-        try:
+        
 
-            if isinstance(client_number, int):
-                self.__client_number = client_number
+        if isinstance(client_number, int):
+            self.__client_number = client_number
 
-        except (ValueError):
+        else:
             raise ValueError("The client number must be a numerical form")
         
-        if isinstance(balance, (int, float)):
+        if isinstance(balance, float):
             self.__balance = balance
         
         else:
