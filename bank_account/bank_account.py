@@ -1,5 +1,5 @@
 __author__ = "Ralph Vitug"
-__version__ = "ISD 3.0.1"
+__version__ = "ISD 3.0.2"
 
 
 class BankAccount: # initialing a class Client
@@ -70,5 +70,28 @@ class BankAccount: # initialing a class Client
 
         except (ValueError):
             pass
+
+    def deposit(self, amount: float) -> None:
+
+        """
+        Deposits a positive amount into the account.
+        Raises ValueError if amount is not numeric.
+        Validates deposit amount if its positive.
+
+        args:
+            amount (None): A float value representing the 
+            deposit amount.
+        """
+
+        try:
+            amount = float(amount)
+        except (ValueError):
+            raise ValueError(f"Deposit amount: {amount} must be numeric.")
+
+        if amount <= 0:
+            validated = f"${amount:,.2f}"
+            raise ValueError(f"Deposit amount: {validated} must be positive.")
+
+        self.update_balance(amount)
 
     
