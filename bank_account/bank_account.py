@@ -1,5 +1,5 @@
 __author__ = "Ralph Vitug"
-__version__ = "ISD 3.0.0"
+__version__ = "ISD 3.0.1"
 
 
 class BankAccount: # initialing a class Client
@@ -39,3 +39,36 @@ class BankAccount: # initialing a class Client
 
             except (ValueError):
                 self.__balance = 0
+
+    
+    @property
+    def account_number(self) -> int:
+        return self.__account_number
+    
+    @property
+    def client_number(self) -> int:
+        return self.__client_number
+    
+    @property
+    def balance(self) -> float:
+        return self.__balance
+    
+    def update_balance(self, amount) -> None:
+
+        """
+        Updates the amount of the balance.
+        If amount is not valid, it will not update.
+
+        args:
+            amount (None): A float value representing 
+            the value of the balance.
+
+        """
+
+        try:
+            self.__balance += float(amount)
+
+        except (ValueError):
+            pass
+
+    
