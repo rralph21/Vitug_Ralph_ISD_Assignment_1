@@ -41,13 +41,16 @@ class Client: # initialing a class Client
             # raises value error if last name is blank
 
         try: # email validation block is invoke in a try and except block
-            validated_email = validate_email(email_address, check_deliverability=False)
+            
+            validate_email(email_address, check_deliverability=False)
              # email validation
              # check_deliverability set to false to avoid delay
             self.__email_address = email_address
         
         except EmailNotValidError:
-            self.__email_address = "email@pixell-river.com"
+
+            raise
+            # self.__email_address = "email@pixell-river.com"
             # setting email attribute as required
             
         
