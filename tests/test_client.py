@@ -79,7 +79,8 @@ class TestClient(unittest.TestCase): # initializing class of test client
         self.assertEqual(expected, str(self.client))
 
 
-    
+if __name__ == "__main__":
+    unittest.main()
 
 
 
