@@ -98,7 +98,8 @@ def main():
  
 
     # 12. Code a statement which prints the BankAccount instance created in step 3. 
-
+    print("Closing BankAccount Statement")
+    print(bank_account)
   
 
 
