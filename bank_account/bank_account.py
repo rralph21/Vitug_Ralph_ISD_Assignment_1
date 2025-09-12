@@ -1,5 +1,5 @@
 __author__ = "Ralph Vitug"
-__version__ = "ISD 3.1.0"
+__version__ = "ISD 3.1.1"
 
 
 class BankAccount: # initialing a class Client
@@ -13,24 +13,28 @@ class BankAccount: # initialing a class Client
         client_number (int): An integer value representing the client number
         balance (float): A floating number representing the balance of the account
 
+    Raises:
+        ValueError 1 is raised if the account number is not an integer data type.
+        ValueError 2 is raised if the client number is not an integer data type.
 
     """
 
-    def __init__(self, account_number: int, client_number: int, balance: float):
+    def __init__(self, account_number: int, client_number: int, balance=0):
         
         if isinstance(account_number, int):
             self.__account_number = account_number
 
         else:
             raise ValueError("The account number must be a numerical form")
-        
-        if isinstance(client_number, int):
-            self.__client_number = client_number
+        try:
 
-        else:
+            if isinstance(client_number, int):
+                self.__client_number = client_number
+
+        except (ValueError):
             raise ValueError("The client number must be a numerical form")
         
-        if isinstance(balance, float):
+        if isinstance(balance, (int, float)):
             self.__balance = balance
         
         else:
@@ -63,6 +67,8 @@ class BankAccount: # initialing a class Client
             amount (None): A float value representing 
             the value of the balance.
 
+        Raises:
+            ValueError is raised but passed if the amount is invalid
         """
 
         try:
@@ -81,6 +87,10 @@ class BankAccount: # initialing a class Client
         args:
             amount (None): A float value representing the 
             deposit amount.
+
+        Raises:
+            ValueError raised if deposit amount is non numeric.
+            ValueError raised if deposit amount is of negative value.
         """
 
         try:
@@ -103,6 +113,11 @@ class BankAccount: # initialing a class Client
         args:
             amount (float): A float value representing 
             the withdrawal amount.
+
+        Raises:
+            ValueError 1 raised if amount is none numeric.
+            ValueError 2 raised if amount is of negative value.
+            ValueError 3 raised if withdrawal amount exceeds the balance.
         """
         
         try:
@@ -124,5 +139,13 @@ class BankAccount: # initialing a class Client
             )
 
         self.update_balance(-amount)
+
+    def __str__(self) -> str:
+        return f"Account Number: {self.__account_number} Balance: ${self.__balance:,.2f}\n"
+        
+
+acct = BankAccount(20019, 12345, 6764.67)
+
+print(acct)
 
     
