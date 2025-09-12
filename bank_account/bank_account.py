@@ -17,6 +17,9 @@ class BankAccount: # initialing a class Client
         ValueError 1 is raised if the account number is not an integer data type.
         ValueError 2 is raised if the client number is not an integer data type.
 
+    __str__:
+        Produces a string value that is formatted as per
+            assignment requirements.
     """
 
     def __init__(self, account_number: int, client_number: int, balance=0):
