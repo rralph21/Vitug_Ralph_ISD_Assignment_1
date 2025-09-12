@@ -55,3 +55,71 @@ class TestBankAccount(unittest.TestCase):
         # Arrange is setUp
         # Act & Assert
         self.assertEqual(100.0, round(self.account.balance, 2))
+
+    def test_update_balance_positive(self):
+        # Arrange is setUp
+        # Act
+        self.account.update_balance(50.0)
+
+        # Assert
+        self.assertEqual(150.0, self.account.balance)
+
+    def test_update_balance_negative(self):
+        # Arrange is setUp
+        # Act
+        self.account.update_balance(-40.0)
+
+        # Assert
+        self.assertEqual(60.0, self.account.balance)
+
+    def test_update_balance_non_numeric(self):
+        # Arrange is setUp
+        # Act
+        self.account.update_balance("invalid")
+
+        # Assert
+        self.assertEqual(100.0, self.account.balance)
+
+    def test_deposit_valid_amount(self):
+        # Arrange is setUp
+        # Act
+        self.account.deposit(25.0)
+
+        # Assert
+        self.assertEqual(125.0, self.account.balance)
+
+    def test_deposit_negative_raises(self):
+        # Arrange & Act / Assert
+        with self.assertRaises(ValueError):
+            self.account.deposit(-20)
+
+    def test_withdraw_valid(self):
+        # Arrange is setUp
+        # Act
+        self.account.withdraw(50.0)
+
+        # Assert
+        expected = 50.0
+        actual = self.account.balance
+        self.assertEqual(expected, round(actual, 2))
+
+    def test_withdraw_negative_raises(self):
+        # Arrange & Act / Assert
+        with self.assertRaises(ValueError):
+            self.account.withdraw(-10)
+
+    def test_withdraw_exceeds_balance_raises(self):
+        # Arrange & Act / Assert
+        with self.assertRaises(ValueError):
+            self.account.withdraw(200.0)
+
+    def test_str(self):
+        # Arrange is setUp
+        expected = "Account Number: 123 Balance: $100.00\n"
+
+        # Assert
+        self.assertEqual(expected, str(self.account))
+
+
+if __name__ == "__main__":
+    unittest.main()
