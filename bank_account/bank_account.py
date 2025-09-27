@@ -1,8 +1,13 @@
 __author__ = "Ralph Vitug"
 __version__ = "ISD 3.1.1"
 
+from abc import ABC, abstractmethod
+from datetime import date
 
-class BankAccount: # initialing a class Client
+class BankAccount(ABC): 
+
+    BASE_SERVICE_CHARGE: float = 0.50
+
     """
     
     Bank Account information
@@ -22,7 +27,8 @@ class BankAccount: # initialing a class Client
             assignment requirements.
     """
 
-    def __init__(self, account_number: int, client_number: int, balance=0):
+    def __init__(self, account_number: int, client_number: int, 
+                 balance: float, date_created: date):
         
         if isinstance(account_number, int):
             self.__account_number = account_number
@@ -46,6 +52,11 @@ class BankAccount: # initialing a class Client
 
             except (ValueError):
                 self.__balance = 0
+        
+        if isinstance(date_created, date):
+            self._date_created = date_created
+        else:
+            self._date_created = date.today()
 
     
     @property
@@ -143,12 +154,11 @@ class BankAccount: # initialing a class Client
 
         self.update_balance(-amount)
 
+    def get_service_charges(self) -> float:
+        return BankAccount.BASE_SERVICE_CHARGE
+
     def __str__(self) -> str:
         return f"Account Number: {self.__account_number} Balance: ${self.__balance:,.2f}\n"
         
-
-acct = BankAccount(20019, 12345, 6764.67)
-
-print(acct)
 
     
