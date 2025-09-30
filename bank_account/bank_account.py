@@ -154,8 +154,10 @@ class BankAccount(ABC):
 
         self.update_balance(-amount)
 
+    @abstractmethod
     def get_service_charges(self) -> float:
-        return BankAccount.BASE_SERVICE_CHARGE
+       
+       pass
 
     def __str__(self) -> str:
         return f"Account Number: {self.__account_number} Balance: ${self.__balance:,.2f}\n"
