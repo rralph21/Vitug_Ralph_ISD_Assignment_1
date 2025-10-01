@@ -83,8 +83,15 @@ print("===================================================")
 # by using the withdraw method of the superclass and withdrawing 
 # the service charges determined by each instance invoking the 
 # polymorphic get_service_charges method.
+accounts = [chequing_account, savings_account, investment_account, investment_account_old]
 
-
-
+for account in accounts:
+    charge = account.get_service_charges()
+    account.withdraw(charge)
+    
 # 13. Print each of the bank account objects created in steps 2, 5, 8 and 10.
+print("Service Charges for All Accounts:\n")
+for account in accounts:
 
+    print(account)
+    print(f"Service Charges Withdrawn: {round(charge, 2)}\n")
