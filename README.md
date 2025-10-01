@@ -12,3 +12,7 @@ Assignment 2: Added chequing, investment and savings accounts. This assignment w
 
 ## Encapsulation
 In this assignment, encapsulation was achieved by making data private and only allowing controlled or limited access through public method(accessor) and properties. In the BankAccount class, attributes such as account_number, client_number and balance are private, meaning access from the outside world is restricted. @property(declared as a stereotype on UML provided) allowed controlled or limited access, which let other parts of the assignment read the values without the capability to modify them. Only changes were allowed through methods like deposit, withdraw, and update balance, as well as exceptions that ensured values are numeric(integer, float), positive and within limits.
+
+## Polymorphism
+In Assignment 2, polymorphism in the BankAccount sublasses means they all use the same get_service_charges method name, but each one calculates the charges in its own way. Just like in the activity where, Shapes used the same calculate_perimeter and calculate_are method name, but each one calculates differently depending if its triangle or rectangle.
+It significantly reduced redundancy of codes, specially with different types of accounts.
