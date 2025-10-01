@@ -3,7 +3,7 @@ Description: Unit tests for the ChequingAccount class.
 Author: ACE Faculty
 Usage: To execute all tests in the terminal execute 
 the following command:
-    python -m unittest tests.test_chequing_account.py
+    python -m unittest tests.test_chequing_account
 """
 
 __author__ = "Ralph Vitug"

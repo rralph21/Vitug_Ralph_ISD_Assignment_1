@@ -18,8 +18,8 @@ class InvestmentAccount(BankAccount):
         InvestmentAccount.
 
     raises/exception:
-        
-
+        management_fee (float): converts to float but, defaults
+        to 2.55 if value is invalid.
     """
     TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
 
@@ -35,25 +35,42 @@ class InvestmentAccount(BankAccount):
         except ValueError:
             self.__management_fee = 2.55
 
-    def management_fee(self, management_fee) -> float:
+    def get_service_charges(self) -> float:
+        """
+        Calculate service charges
 
-        if self.date_created >= 10:
-            
+        args:
+            InvestmentAccount (float): > 10 y.o + BSC,
+            < 10 y.o + (BSC + MF).
+        """
+
+        if self._date_created <= InvestmentAccount.TEN_YEARS_AGO:
             return BankAccount.BASE_SERVICE_CHARGE
-        
-        else:  
-            return BankAccount.BASE_SERVICE_CHARGE + management_fee
+        else:
+            return BankAccount.BASE_SERVICE_CHARGE + self.__management_fee
 
 
 
     def __str__(self) -> str:
+        """
+        String method of InvestmentAccount
+
+        fee: InvestmentAccount < 10 y.o
+            returns: "Waived"
+
+        returns:
+            str: details as required.
+        """
+
+        if self._date_created <= InvestmentAccount.TEN_YEARS_AGO:
+            fee = "Waived"
+
+        else:
+            fee = f"${self.__management_fee:,.2f}"
 
         return (
             super().__str__()
-            + f"Date Created: {date}"
-            + f"Management Fee: ${self.__management_fee}"
-            + "Account Type: Investment"
-        )
-
-
-    
+            + f"Date Created: {self._date_created}"
+            + f" Management Fee: {fee}"
+            + " Account Type: Investment"
+            )
