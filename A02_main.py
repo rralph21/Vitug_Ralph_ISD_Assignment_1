@@ -8,11 +8,14 @@ __credits__ = ""
 
 # 1.  Import all BankAccount types using the bank_account package
 #     Import date from datetime
-
+from bank_account import *
+from datetime import date, timedelta
 
 # 2. Create an instance of a ChequingAccount with values of your 
 # choice including a balance which is below the overdraft limit.
-
+chequing_account = ChequingAccount(account_number=2121, client_number=2222,
+                                   balance=-200.00, date_created=date.today(),
+                                   overdraft_limit=-100.00, overdraft_rate=0.05)
 
 # 3. Print the ChequingAccount created in step 2.
 # 3b. Print the service charges amount if calculated based on the 
