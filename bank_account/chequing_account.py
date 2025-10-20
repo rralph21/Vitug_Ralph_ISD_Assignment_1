@@ -66,7 +66,7 @@ class ChequingAccount(BankAccount):
         String method of ChequingAccount
 
         returns:
-            str: Account details as required.
+            str: details as required.
 
         """
 

@@ -39,7 +39,7 @@ class InvestmentAccount(BankAccount):
         """
         Calculate service charges
 
-        args:
+        returns:
             InvestmentAccount (float): > 10 y.o + BSC,
             < 10 y.o + (BSC + MF).
         """
@@ -72,5 +72,5 @@ class InvestmentAccount(BankAccount):
             super().__str__()
             + f"Date Created: {self._date_created}"
             + f" Management Fee: {fee}"
-            + " Account Type: Investment"
+            + " Account type: Investment"
             )
