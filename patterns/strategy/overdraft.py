@@ -12,6 +12,8 @@ class OverdraftStrategy(ServiceChargeStrategy):
     """
 
     def __init__(self, overdraft_limit: float, overdraft_rate: float):
+
+        super()
         
         try:
             self.__overdraft_limit = float(overdraft_limit)
@@ -35,9 +37,9 @@ class OverdraftStrategy(ServiceChargeStrategy):
 
         """
 
-        if self.balance < self.__overdraft_limit:
+        if account < self.__overdraft_limit:
         
-            overdraft_cost = abs(self.balance - self.__overdraft_limit) * self.__overdraft_rate
+            overdraft_cost = abs(account - self.__overdraft_limit) * self.__overdraft_rate
             return BankAccount.BASE_SERVICE_CHARGE + overdraft_cost
         else:
             
