@@ -9,24 +9,20 @@ __credits__ = ""
 # 1.  Import all BankAccount types using the bank_account package
 #     Import date
 #     Import Client
-
-
-
-
+from bank_account import *
+from datetime import date
+from client.client import Client 
 
 
 # 2. Create a Client object with data of your choice.
 
 
-
-
 # 3a. Create a ChequingAccount object with data of your choice, using the client_number 
 # of the client created in step 2.
+
+
 # 3b. Create a SavingsAccount object with data of your choice, using the client_number 
 # of the client created in step 2.
-
-
-
 
 
 # 4 The ChequingAccount and SavingsAccount objects are 'Subject' objects.

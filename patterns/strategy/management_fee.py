@@ -37,15 +37,18 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
         
 
     def calculate_service_charge(self, account) -> float:
-         """
-        Calculate service charges
+        """
+            Calculate service charges
 
-        returns:
-            InvestmentAccount (float): > 10 y.o + BSC,
-            < 10 y.o + (BSC + MF).
+            returns:
+                InvestmentAccount (float): > 10 y.o + BSC,
+                < 10 y.o + (BSC + MF).
         """
 
-        if self.__date_created <= self.TEN_YEARS_AGO:
+        if self._date_created <= self.TEN_YEARS_AGO:
+        
             return self.BASE_SERVICE_CHARGE
+
         else:
+
             return self.BASE_SERVICE_CHARGE + self.__management_fee
