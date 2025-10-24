@@ -3,12 +3,11 @@ __version__ = "1.0.0"
 
 from typing import List
 from patterns.strategy.service_charge import ServiceChargeStrategy
-from bank_account.bank_account import BankAccount
 from datetime import date, timedelta
 
-class ManagementFeeStrategy(BankAccount):
+class ManagementFeeStrategy(ServiceChargeStrategy):
     """
-     Initializes ManagementFeeStrategy upon received argument
+    Initializes ManagementFeeStrategy upon received argument
     (if valid).
 
     ars:
@@ -18,21 +17,26 @@ class ManagementFeeStrategy(BankAccount):
         management_fee (float): The management_fee is a float which
         stores a flat-rate fee the bank charges for managing an 
         InvestmentAccount.
+
+    raises/exception:
+        management_fee (float): converts to float but, defaults
+        to 2.55 if value is invalid.
     """
 
     TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
 
     def __init__(self, date_created: date, management_fee: float):
 
-        try:
-            self.__management_fee = float(management_fee)
-
-        except ValueError:
-            self.__management_fee = 2.55
-
         self._date_created = date_created
 
-    def calculate_service_charge(self, account):
+        try:
+            self.__management_fee = float(management_fee)
+        except (ValueError):
+            self.__management_fee = 2.55
+
+        
+
+    def calculate_service_charge(self, account) -> float:
          """
         Calculate service charges
 
@@ -41,8 +45,7 @@ class ManagementFeeStrategy(BankAccount):
             < 10 y.o + (BSC + MF).
         """
 
-        if account.__date_created <= self.TEN_YEARS_AGO:
+        if self.__date_created <= self.TEN_YEARS_AGO:
             return self.BASE_SERVICE_CHARGE
-
         else:
             return self.BASE_SERVICE_CHARGE + self.__management_fee

@@ -3,6 +3,7 @@ __version__ = "1.0.0"
 
 from bank_account import BankAccount
 from datetime import date
+from patterns.strategy.overdraft import OverdraftStrategy
 
 class ChequingAccount(BankAccount):
 
@@ -42,24 +43,17 @@ class ChequingAccount(BankAccount):
         except ValueError:
             self.__overdraft_rate = 0.05
         
+        # OverDraftStrategy
+        self.__service_charge_strategy = OverdraftStrategy(
+            self.__overdraft_limit, self.__overdraft_rate
+        )
 
     def get_service_charges(self) -> float:
         """
-        Method to calculate service charges.
-
-        args:
-            get_service_charges (float): charges that returns float
-
+        get_service_charges (float): calulation if from OverDraftStrategy
         """
 
-        if self.balance < self.__overdraft_limit:
-        
-            overdraft_cost = abs(self.balance - self.__overdraft_limit) * self.__overdraft_rate
-            return BankAccount.BASE_SERVICE_CHARGE + overdraft_cost
-        else:
-            
-            return BankAccount.BASE_SERVICE_CHARGE
-        
+        return self.__service_charge_strategy.calculate_service_charges(self)
         
     def __str__(self) -> str:
         """

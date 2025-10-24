@@ -9,23 +9,15 @@ class OverdraftStrategy(ServiceChargeStrategy):
     """
     OverdraftStrategy charges accounts that exceeds the maximum
     threshold of balance insuffeciency.
+
+    
     """
 
     def __init__(self, overdraft_limit: float, overdraft_rate: float):
-
-        super()
         
-        try:
-            self.__overdraft_limit = float(overdraft_limit)
-        
-        except ValueError:
-            self.__overdraft_limit = -100.0
-
-        try:
-            self.__overdraft_rate = float(overdraft_rate)
-
-        except ValueError:
-            self.__overdraft_rate = 0.05
+        self.__overdraft_limit = float(overdraft_limit)
+    
+        self.__overdraft_rate = float(overdraft_rate)
         
     def calculate_service_charges(self, account: BankAccount) -> float:
 
