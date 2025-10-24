@@ -9,6 +9,10 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
     """
     MinimumBalanceStrategy charges a fee to accounts that exceeds
     below minimum balance.
+
+    raises/exception:
+        minimum_balance (float): converts to float, but
+        defaults to 50.00 if value is invalid.
     """
 
     SERVICE_CHARGE_PREMIUM: float = 2.0
