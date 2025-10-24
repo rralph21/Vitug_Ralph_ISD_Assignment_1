@@ -1,12 +1,13 @@
 __author__ = "Ralph Vitug"
 __version__ = "ISD 3.1.1"
 
+from __future__ import annotations
 from abc import ABC, abstractmethod
 from datetime import date
+from typing import Any
+from patterns.observer.subject import Subject
 
-class BankAccount(ABC): 
-
-    BASE_SERVICE_CHARGE: float = 0.50
+class BankAccount(Subject, ABC): 
 
     """
     
@@ -27,8 +28,15 @@ class BankAccount(ABC):
             assignment requirements.
     """
 
+    LOW_BALANCE_LEVEL: float = 50.00
+    LARGE_TRANSACTION_THRESHOLD: float = 9999.99
+
     def __init__(self, account_number: int, client_number: int, 
                  balance: float, date_created: date):
+        """
+        Initializes Subject.observer
+        """
+        super().__init__()
         
         if isinstance(account_number, int):
             self.__account_number = account_number
@@ -71,6 +79,49 @@ class BankAccount(ABC):
     def balance(self) -> float:
         return self.__balance
     
+    @property
+    def date_created(self) -> date:
+        return self._date_created
+    
+    def attach(self, observer: Any) -> None:
+        """
+        Adds an observer so it receives notifications.
+        """
+        super().attach(observer)
+
+    def detach(self, observer: Any) -> None:
+        """
+        Removes an observer so it no longer receives notifications.
+        """
+        super().detach(observer)
+
+    def notify(self, message: str) -> None:
+        """
+        Notify all attached observers with the given message.
+        """
+        super().notify(message)
+
+    def _check_low_balance(self) -> None:
+        """
+        Notify observers if the current balance is below LOW_BALANCE_LEVEL.
+        """
+        if self.__balance < self.LOW_BALANCE_LEVEL:
+            self.notify(
+                f"Low balance warning ${self.__balance:,.2f}: "
+                f"on account {self.__account_number}."
+            )
+
+    def _check_large_transaction(self, amount: float) -> None:
+        """
+        Notify observers if the absolute value of a single transaction
+        exceeds LARGE_TRANSACTION_THRESHOLD.
+        """
+        if abs(amount) > self.LARGE_TRANSACTION_THRESHOLD:
+            self.notify(
+                f"Large transaction ${abs(amount):,.2f}: " 
+                f"on account {self.__account_number}."
+            )
+    
     def update_balance(self, amount) -> None:
 
         """
@@ -86,10 +137,17 @@ class BankAccount(ABC):
         """
 
         try:
-            self.__balance += float(amount)
+            amount = float(amount)
 
         except (ValueError):
-            pass
+            print("Invalid amount. Please enter a number.")
+            return
+        
+        self.__balance = self.__balance + amount
+
+        self._check_low_balance()
+
+        self._check_large_transaction(amount)
 
     def deposit(self, amount: float) -> None:
 

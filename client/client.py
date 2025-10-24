@@ -3,6 +3,9 @@ __version__ = "ISD 2.1.0"
 
 
 from email_validator import validate_email, EmailNotValidError
+from patterns.observer.observer import Observer
+from utility.file_utils import simulate_send_email
+from datetime import datetime
 
 class Client: # initialing a class Client
     """
@@ -80,8 +83,26 @@ class Client: # initialing a class Client
     @property 
     def email_address(self) -> str: 
         return self.__email_address
+    
+    def update(self, message: str) -> None:
+        """
+        update is called automatically when a Subject (i.e BankAccount)
+        notifies this Client.
+
+        Args:
+            message (str): The message sent by the Subject.
+        """
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # timestamp is shared by a classmate Matthew T
+
+        subject = f"ALERT: Unusual Activity: {timestamp}"
+        body = (f"Notification for {self.client_number}: {self.first_name}"
+            f" {self.last_name}: {message}")
+
+        simulate_send_email(subject, body)
         
     def __str__(self) -> str: 
             
-        return f"{self.__last_name}, {self.__first_name} [{self.__client_number}] - {self.__email_address}"
+        return (f"{self.__last_name}, {self.__first_name}"
+        "[{self.__client_number}] - {self.__email_address}")
         
