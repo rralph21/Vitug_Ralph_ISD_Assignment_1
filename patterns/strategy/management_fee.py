@@ -36,7 +36,7 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
 
         
 
-    def calculate_service_charge(self, account) -> float:
+    def calculate_service_charges(self, account) -> float:
         """
             Calculate service charges
 

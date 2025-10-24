@@ -28,11 +28,12 @@ class OverdraftStrategy(ServiceChargeStrategy):
             get_service_charges (float): charges that returns float
 
         """
-
-        if account < self.__overdraft_limit:
+        balance = account.balance
         
-            overdraft_cost = abs(account - self.__overdraft_limit) * self.__overdraft_rate
-            return BankAccount.BASE_SERVICE_CHARGE + overdraft_cost
+        if balance < self.__overdraft_limit:
+        
+            overdraft_cost = abs(balance - self.__overdraft_limit) * self.__overdraft_rate
+            return ServiceChargeStrategy.BASE_SERVICE_CHARGE + overdraft_cost
         else:
             
-            return BankAccount.BASE_SERVICE_CHARGE
+            return ServiceChargeStrategy.BASE_SERVICE_CHARGE

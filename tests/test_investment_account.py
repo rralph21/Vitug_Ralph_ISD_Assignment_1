@@ -93,7 +93,7 @@ class TestInvestmentAccount(unittest.TestCase):
             f"Account Number: 2121 Balance: $1,000.00\n"
             f"Date Created: {recent_date} "
             f"Management Fee: $2.00 "
-            f"Account type: Investment"
+            f"Account Type: Investment"
         )
 
         # Act & Assert

@@ -34,14 +34,11 @@ class SavingsAccount(BankAccount):
         
         try:
             self.__minimum_balance = float(minimum_balance)
-
-        except ValueError:
-            self.__minimum_balance = 50.00
-
+        except (TypeError, ValueError):
+            self.__minimum_balance = 50.0
+        
         #MinimumBalanceStrategy
-        self.__service_charge_strategy = MinimumBalanceStrategy(
-            minimum_balance=self.__minimum_balance
-        )
+        self.__service_charge_strategy = MinimumBalanceStrategy(minimum_balance)
 
     def get_service_charges(self) -> float:
         """

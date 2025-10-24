@@ -16,3 +16,13 @@ In this assignment, encapsulation was achieved by making data private and only a
 ## Polymorphism
 In Assignment 2, polymorphism in the BankAccount sublasses means they all use the same get_service_charges method name, but each one calculates the charges in its own way. Just like in the activity where, Shapes used the same calculate_perimeter and calculate_are method name, but each one calculates differently depending if its triangle or rectangle.
 It significantly reduced redundancy of codes, specially with different types of accounts.
+
+## Strategy Pattern
+In Assignment 3, Strategy pattern is used to handle different ways of calculating service charges for various
+types of bank account. Instead of putting all the calculation rules inside the BankAccount class, each account
+type uses its own strategy. Like the analogy given in class, "Calculator" it has different methods.
+Strategy Pattern significantly reduced redundancy in coding.
+
+## Observer Pattern
+In Assignment 3, Observer Pattern is used to create a communication link between Subject (BankAccount)
+and Client (Observer). When an important activity happens to a bank account, the client is notified.

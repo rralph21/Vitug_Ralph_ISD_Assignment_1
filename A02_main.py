@@ -10,6 +10,7 @@ __credits__ = ""
 #     Import date from datetime
 from bank_account import *
 from datetime import date, timedelta
+from patterns.strategy import *
 
 # 2. Create an instance of a ChequingAccount with values of your 
 # choice including a balance which is below the overdraft limit.

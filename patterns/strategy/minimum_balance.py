@@ -25,7 +25,7 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
         except ValueError:
             self.__minimum_balance = 50.00
 
-    def calculate_service_charges(self, account: BankAccount, balance: float) -> float:
+    def calculate_service_charges(self, account) -> float:
         """
         Calculates service charges
 
@@ -34,8 +34,9 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
             balance < minimum_balance + (BSC * SCP)
         
         """
+        balance = account.balance
 
-        if account.balance >= self.__minimum_balance:
+        if balance >= self.__minimum_balance:
             return self.BASE_SERVICE_CHARGE
         else:
             return self.BASE_SERVICE_CHARGE * self.SERVICE_CHARGE_PREMIUM

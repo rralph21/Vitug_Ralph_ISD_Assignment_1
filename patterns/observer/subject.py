@@ -2,7 +2,7 @@ __author__ = "Ralph Vitug"
 __version__ = "1.0.0"
 
 from typing import List
-from observer import Observer
+from .observer import Observer
 
 class Subject:
     """

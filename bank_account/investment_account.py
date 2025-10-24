@@ -38,14 +38,14 @@ class InvestmentAccount(BankAccount):
 
         #ManagementFeeStrategy
         self.__service_charge_strategy = ManagementFeeStrategy(
-            date_created=self._date_created, 
-            management_fee=self.__management_fee
+            date_created = self._date_created, 
+            management_fee = self.__management_fee
         )
 
     def get_service_charges(self) -> float:
         """
 
-        InvestmentAccount (float): Calculation from ManagementFeeStrategy
+        get_service_charges: Calculation from ManagementFeeStrategy
 
         """
 
@@ -73,5 +73,5 @@ class InvestmentAccount(BankAccount):
             super().__str__()
             + f"Date Created: {self._date_created}"
             + f" Management Fee: {fee}"
-            + " Account type: Investment"
+            + " Account Type: Investment"
             )

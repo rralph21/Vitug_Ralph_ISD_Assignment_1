@@ -17,7 +17,7 @@ class ServiceChargeStrategy(ABC):
     def calculate_service_charges(self, account: BankAccount): float
     """
     calculate_service_charge method will be implemented in each
-    of the ssublcasses of ServiceChargeStrategy baed on the specific
+    of the sublcasses of ServiceChargeStrategy baed on the specific
     strategy being employed.
     """
     pass

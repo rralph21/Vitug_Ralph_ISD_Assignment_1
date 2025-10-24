@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 __author__ = "Ralph Vitug"
 __version__ = "ISD 3.1.1"
 
-from __future__ import annotations
 from abc import ABC, abstractmethod
 from datetime import date
 from typing import Any
@@ -79,10 +80,6 @@ class BankAccount(Subject, ABC):
     def balance(self) -> float:
         return self.__balance
     
-    @property
-    def date_created(self) -> date:
-        return self._date_created
-    
     def attach(self, observer: Any) -> None:
         """
         Adds an observer so it receives notifications.
@@ -143,7 +140,7 @@ class BankAccount(Subject, ABC):
             print("Invalid amount. Please enter a number.")
             return
         
-        self.__balance = self.__balance + amount
+        self.__balance += amount
 
         self._check_low_balance()
 
