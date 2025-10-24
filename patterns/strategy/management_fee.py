@@ -30,7 +30,9 @@ class ManagementFeeStrategy(BankAccount):
         except ValueError:
             self.__management_fee = 2.55
 
-    def calculate_service_charge(self, account: BankAccount) -> float:
+        self._date_created = date_created
+
+    def calculate_service_charge(self, account):
          """
         Calculate service charges
 
@@ -39,8 +41,8 @@ class ManagementFeeStrategy(BankAccount):
             < 10 y.o + (BSC + MF).
         """
 
-        if self._date_created <= ManagementFeeStrategy.TEN_YEARS_AGO:
-            return BankAccount.BASE_SERVICE_CHARGE
-    
+        if account.__date_created <= self.TEN_YEARS_AGO:
+            return self.BASE_SERVICE_CHARGE
+
         else:
-            return BankAccount.BASE_SERVICE_CHARGE + self.__management_fee 
+            return self.BASE_SERVICE_CHARGE + self.__management_fee
