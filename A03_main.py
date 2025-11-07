@@ -15,6 +15,7 @@ from client.client import Client
 from patterns.observer.observer import Observer
 
 
+
 # 2. Create a Client object with data of your choice.
 client_1 = Client(
     client_number = 1001,
@@ -96,4 +97,6 @@ def safe_withdraw(acct, amount):
         print(f"Withdrew ${amount:,.2f} from Account #{acct.account_number}. New balance: ${acct.balance:,.2f}")
     except Exception as e:
         print(f"[WITHDRAW ERROR on #{acct.account_number}] {e}")
+
+
 

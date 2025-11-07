@@ -50,7 +50,7 @@ class ChequingAccount(BankAccount):
 
     def get_service_charges(self) -> float:
         """
-        get_service_charges (float): calulation if from OverDraftStrategy
+        get_service_charges (float): calulation from OverDraftStrategy
         """
 
         return self.__service_charge_strategy.calculate_service_charges(self)

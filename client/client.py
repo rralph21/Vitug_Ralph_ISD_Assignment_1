@@ -4,8 +4,8 @@ __version__ = "ISD 2.1.0"
 
 from email_validator import validate_email, EmailNotValidError
 from patterns.observer.observer import Observer
-from utility.file_utils import simulate_send_email
 from datetime import datetime
+from utility.file_utils import simulate_send_email
 
 class Client: # initialing a class Client
     """
@@ -99,7 +99,7 @@ class Client: # initialing a class Client
         body = (f"Notification for {self.client_number}: {self.first_name}"
             f" {self.last_name}: {message}")
 
-        simulate_send_email(subject, body)
+        simulate_send_email(self.email_address, subject, body)
         
     def __str__(self) -> str: 
             
