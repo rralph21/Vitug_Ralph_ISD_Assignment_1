@@ -10,6 +10,11 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
 from datetime import datetime
 import logging
+from PySide6.QtWidgets import QApplication
+import sys
+from client.client import Client
+from bank_account.bank_account import BankAccount
+
 
 # *******************************************************************************
 # GIVEN LOGGING AND FILE ACCESS CODE
@@ -55,8 +60,17 @@ def load_data()->tuple[dict,dict]:
     Returns:
         tuple containing client dictionary and account dictionary.
     """
-    client_listing = {}
-    accounts = {}
+    super().__init__(Client, BankAccount)
+
+    client_listing = {
+        client_number : float,
+        first_name : str,
+        last_name : str,
+        email_address : str
+
+    } # key = client_number. value = first_name, last_name and email
+
+    accounts = {} # key = account_number. value = chequing, investment and savings acct.
 
     # READ CLIENT DATA 
     with open(clients_csv_path, newline='') as csvfile:
