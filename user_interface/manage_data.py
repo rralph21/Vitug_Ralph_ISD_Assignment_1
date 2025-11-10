@@ -70,15 +70,25 @@ def load_data()->tuple[dict,dict]:
 
     } # key = client_number. value = first_name, last_name and email
 
-    accounts = {} # key = account_number. value = chequing, investment and savings acct.
+    accounts = {
+        account_number : float,
+        client_number : str,
+        date_created : datetime,
+        account_type: str,
+        overdraft_limit : float,
+        overdraft_rate : float,
+        minimum_balance : float,
+        management_fee : float
+
+    } # key = account_number. value = chequing, investment and savings acct.
 
     # READ CLIENT DATA 
-    with open(clients_csv_path, newline='') as csvfile:
+    with open(clients_csv_path, newline='a') as csvfile:
         reader = csv.DictReader(csvfile)
         
 
     # READ ACCOUNT DATA
-    with open(accounts_csv_path, newline='') as csvfile:
+    with open(accounts_csv_path, newline='a') as csvfile:
         reader = csv.DictReader(csvfile)  
 
     # RETURN STATEMENT
