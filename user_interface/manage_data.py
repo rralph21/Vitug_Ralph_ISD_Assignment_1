@@ -71,7 +71,7 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
         client_listing: dict[int, Client]
             logging: if client data is invalid, it will log the error
         accounts: dict[int, BankAccounts]
-            raiese: ValueError if the account type is invalid
+            raises: ValueError if the account type is invalid
             logging: if account_number doesnt match client_number,
                     it will log the error.
     """
@@ -118,11 +118,11 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
                 client_number = int(row["client_number"])
                 balance = float(row["balance"])
 
-                #checking datetime format
+                #converting date to datetime object
                 date_created = datetime.strptime(row["date_created"], "%Y-%m-%d")
 
                 account_type = row["account_type"]
-
+                
                 if row["overdraft_limit"] == "Null":
                     overdraft_limit = None
 
@@ -183,12 +183,13 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
 
                     accounts[account_number] = new_account
 
+                #Exception handler and logging for invalid client
                 else:
                     logging.error(
                         f"Bank Account: {account_number} contains invalid"
                         + f" Client Number: {client_number}"
                     )
-
+            #Exception handler and logging for all other errors
             except Exception as e:
 
                 logging.error(
