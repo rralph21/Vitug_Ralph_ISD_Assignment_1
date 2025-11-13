@@ -66,9 +66,15 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
         dict: key = account_number (int)
               value = ChequingAccount, SavingsAccount,
                       InvestmentAccount objects
-    """
-    super().__init__(Client, BankAccount)
 
+    exception:
+        client_listing: dict[int, Client]
+            logging: if client data is invalid, it will log the error
+        accounts: dict[int, BankAccounts]
+            raiese: ValueError if the account type is invalid
+            logging: if account_number doesnt match client_number,
+                    it will log the error.
+    """
     client_listing: dict[int, Client]= {} # key = client_number. value = first_name, last_name and email
 
     accounts: dict[int, BankAccount] = {} # key = account_number. value = chequing, investment and savings acct.
@@ -98,16 +104,99 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
             except Exception as e:
                 # Logging
                 logging.error(
-                    f"Unable to create client record: "
-                    f"{row} | Error : {e}"
+                    f"Unable to create client record: {e}"
                 )
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
 
-       
+        for row in reader:
+            try:
+                #converting numeric values
+                account_number = int(row["account_number"])
+                client_number = int(row["client_number"])
+                balance = float(row["balance"])
+
+                #checking datetime format
+                date_created = datetime.strptime(row["date_created"], "%Y-%m-%d")
+
+                account_type = row["account_type"]
+
+                if row["overdraft_limit"] == "Null":
+                    overdraft_limit = None
+
+                else:
+                    overdraft_limit = float(row["overdraft_limit"])
+
+                if row["overdraft_rate"] == "Null":
+                    overdraft_rate = None
+
+                else:
+                    overdraft_rate = float(row["overdraft_rate"])
+
+                if row["minimum_balance"] == "Null":
+                    minimum_balance = None
+
+                else:
+                    minimum_balance = float(row["minimum_balance"])
+
+                if row["management_fee"] == "Null":
+                    management_fee = None
+                
+                else:
+                    management_fee = float(row["management_fee"])
+
+                # BankAccount subclass object
+                if account_type == "ChequingAccount":
+                    new_account = ChequingAccount(
+                        account_number = account_number,
+                        client_number = client_number,
+                        balance = balance,
+                        date_created = date_created,
+                        overdraft_limit = overdraft_limit,
+                        overdraft_rate = overdraft_limit
+                    )
+
+                elif account_type == "InvestmentAccount":
+                    new_account = InvestmentAccount(
+                        account_number = account_number,
+                        client_number = client_number,
+                        balance = balance,
+                        date_created = date_created,
+                        management_fee = management_fee 
+                    )
+
+                elif account_type == "SavingsAccount":
+                    new_account = SavingsAccount(
+                        account_number = account_number,
+                        client_number = client_number,
+                        balance = balance,
+                        date_created = date_created,
+                        minimum_balance = minimum_balance,
+                    )
+                
+                else:
+                    raise ValueError("Not a valid account type.")
+                
+                if client_number in client_listing:
+
+                    accounts[account_number] = new_account
+
+                else:
+                    logging.error(
+                        f"Bank Account: {account_number} contains invalid"
+                        + f" Client Number: {client_number}"
+                    )
+
+            except Exception as e:
+
+                logging.error(
+                    f"Unable to create bank account: {e}"
+                )
     # RETURN STATEMENT
+
+    return client_listing, accounts
     
 
 
