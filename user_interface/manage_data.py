@@ -2,6 +2,8 @@ __author__ = "ACE Faculty"
 __version__ = "1.0.0"
 __credits__ = ""
 
+# For testing code - python -m user_interface.manage_data
+
 import os
 import sys
 # THIS LINE IS NEEDED SO THAT THE GIVEN TESTING 
@@ -13,7 +15,7 @@ import logging
 from PySide6.QtWidgets import QApplication
 import sys
 from client.client import Client
-from bank_account.bank_account import BankAccount
+from bank_account import *
 
 
 # *******************************************************************************
@@ -53,44 +55,58 @@ accounts_csv_path = os.path.join(data_dir, 'accounts.csv')
 
 
 
-def load_data()->tuple[dict,dict]:
+def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
     """
     Populates a client dictionary and an account dictionary with 
     corresponding data from files within the data directory.
     Returns:
         tuple containing client dictionary and account dictionary.
+        dict: key = client_number(int)
+              value = Client object
+        dict: key = account_number (int)
+              value = ChequingAccount, SavingsAccount,
+                      InvestmentAccount objects
     """
     super().__init__(Client, BankAccount)
 
-    client_listing = {
-        client_number : float,
-        first_name : str,
-        last_name : str,
-        email_address : str
+    client_listing: dict[int, Client]= {} # key = client_number. value = first_name, last_name and email
 
-    } # key = client_number. value = first_name, last_name and email
-
-    accounts = {
-        account_number : float,
-        client_number : str,
-        date_created : datetime,
-        account_type: str,
-        overdraft_limit : float,
-        overdraft_rate : float,
-        minimum_balance : float,
-        management_fee : float
-
-    } # key = account_number. value = chequing, investment and savings acct.
+    accounts: dict[int, BankAccount] = {} # key = account_number. value = chequing, investment and savings acct.
 
     # READ CLIENT DATA 
-    with open(clients_csv_path, newline='a') as csvfile:
+    with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        
+
+        for row in reader:
+            try: 
+                # converting client_numbe to int
+                client_number = int(row["client_number"])
+
+                first_name = row["first_name"]
+                last_name = row["last_name"]
+                email_address = row["email_address"]
+
+                client = Client(
+                    client_number = client_number,
+                    first_name = first_name,
+                    last_name = last_name,
+                    email_address = email_address
+                )
+
+                client_listing[client_number] = client
+            
+            except Exception as e:
+                # Logging
+                logging.error(
+                    f"Unable to create client record: "
+                    f"{row} | Error : {e}"
+                )
 
     # READ ACCOUNT DATA
-    with open(accounts_csv_path, newline='a') as csvfile:
-        reader = csv.DictReader(csvfile)  
+    with open(accounts_csv_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
 
+       
     # RETURN STATEMENT
     
 
