@@ -12,5 +12,12 @@ from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
 
 class ClientLookupWindow(LookupWindow):
-    pass
+    
+    def __init__(self):
+        super().__init__()
         
+    self.client_listing, self.accounts = load_data()
+
+    self.lookup_button.clicked.connect(self.on_lookup_client)
+    self.client_number_edit.textChange.connect(self.on_text_changed)
+    self.account_table.cellClicked.connect(self.on_select_account)
