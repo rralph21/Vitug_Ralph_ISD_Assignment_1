@@ -80,6 +80,10 @@ class BankAccount(Subject, ABC):
     def balance(self) -> float:
         return self.__balance
     
+    @property
+    def date_created(self) -> date:
+        return self._date_created
+    
     def attach(self, observer: Any) -> None:
         """
         Adds an observer so it receives notifications.

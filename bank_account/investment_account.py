@@ -63,7 +63,7 @@ class InvestmentAccount(BankAccount):
             str: details as required.
         """
 
-        if self._date_created <= InvestmentAccount.TEN_YEARS_AGO:
+        if self._date_created.date() <= InvestmentAccount.TEN_YEARS_AGO:
             fee = "Waived"
 
         else:

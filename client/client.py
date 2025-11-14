@@ -104,5 +104,5 @@ class Client: # initialing a class Client
     def __str__(self) -> str: 
             
         return (f"{self.__last_name}, {self.__first_name}"
-        "[{self.__client_number}] - {self.__email_address}")
+        f"[{self.__client_number}] - {self.__email_address}")
         
