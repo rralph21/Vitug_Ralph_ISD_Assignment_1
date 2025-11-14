@@ -9,7 +9,7 @@ from PySide6.QtCore import Slot
 from ui_superclasses.lookup_window import LookupWindow
 from user_interface.account_details_window import AccountDetailsWindow
 from user_interface.manage_data import load_data
-from user_interface.manage_data import update_data
+import user_interface.manage_data as manage_data
 from bank_account.bank_account import BankAccount
 
 class ClientLookupWindow(LookupWindow):
@@ -155,4 +155,45 @@ class ClientLookupWindow(LookupWindow):
         selected_account = self.accounts[account_number]
 
         details_window = AccountDetailsWindow(selected_account)
+
+        #connects to the dialogs signal to update_data
+        details_window.balance_updated.connect(self.update_data)
+
         details_window.exec_()
+
+    @Slot(BankAccount)
+    def update_data(self, account: BankAccount) -> None:
+        """
+        Slot for the balance_update signal.
+        """
+
+        row_count = self.account_table.rowCount()
+
+        for row in range(row_count):
+            item = self.account_table.item(row,0)
+            if item is None:
+                continue
+
+            try:
+                table_account_number = int(item.text())
+
+            except ValueError:
+                continue
+
+            if table_account_number == account.account_number:
+                new_balance_text = f"${account.balance:,.2f}"
+
+                balance_item = self.account_table.item(row, 1)
+
+                if balance_item is None:
+                    balance_item = QTableWidgetItem(new_balance_text)
+                    self.account_table.setItem(row, 1, balance_item)
+
+                else:
+                    balance_item.setText(new_balance_text)
+
+                break
+
+        self.accounts[account.account_number] = account
+
+        manage_data.update_data(account)
