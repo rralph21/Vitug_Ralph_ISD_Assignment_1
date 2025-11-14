@@ -33,3 +33,8 @@ Strategy Pattern significantly reduced redundancy in coding.
 ## Observer Pattern
 In Assignment 3, Observer Pattern is used to create a communication link between Subject (BankAccount)
 and Client (Observer). When an important activity happens to a bank account, the client is notified.
+
+## Event-Driven Programming Paradigm
+
+In Assignment 3, Event-Driven Programming paradigm is used by reacting to user
+actions through a network of connected signals and slots. Insteat of executing code in a fixed sequence, the program waits for events, such as button clicks, text changes or table selections, and responds by calling the appropriate handler methods.
