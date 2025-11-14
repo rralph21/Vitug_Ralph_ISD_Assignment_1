@@ -71,7 +71,6 @@ def load_data()->tuple[dict[int, Client],dict[int, BankAccount]]:
         client_listing: dict[int, Client]
             logging: if client data is invalid, it will log the error
         accounts: dict[int, BankAccounts]
-            raises: ValueError if the account type is invalid
             logging: if account_number doesnt match client_number,
                     it will log the error.
     """
