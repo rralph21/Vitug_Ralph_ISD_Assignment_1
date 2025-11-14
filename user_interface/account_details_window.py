@@ -39,14 +39,55 @@ class AccountDetailsWindow(DetailsWindow):
     @Slot()
     def on_apply_transaction(self):
         """
-        Transaction handler
+        Slot for deposit_button and withdraw_button clicked signals
         """
-        pass
+
+        amount_text = self.transaction_amount_edit.text().strip()
+
+        try:
+            amount = float(amount_text)
+
+        except ValueError:
+            QMessageBox.warning(
+                self,
+                "Deposit Failed",
+                "Amount must be numeric."
+            )
+            self.transaction_amount_edit.setFocus()
+            return
+        
+        try:
+            sender = self.sender()
+            transaction_type = ""
+
+            if sender is self.deposit_button:
+                transaction_type = "Deposit"
+                self.account.deposit(amount)
+
+            elif sender is self.withdraw_button:
+                transaction_type = "Withdraw"
+                self.account.withdraw(amount)
+                
+            else:
+                return
+            
+            self.balance_label.setText(f"${self.account.balance:,.2f}")
+            self.transaction_amount_edit.setText("")
+            self.transaction_amount_edit.setFocus()
+
+        except Exception as e:
+            QMessageBox.warning(
+                self,
+                "Transaction Failed",
+                f"{transaction_type} Failed: {e}"
+            )
+            self.transaction_amount_edit.setText("")
+            self.transaction_amount_edit.setFocus()
 
     @Slot()
     def on_exit(self):
         """
-        Exit handler
+        Slot for the exit_button clicked signal.
         """
-        pass
+        self.close()
     
