@@ -20,8 +20,8 @@ class ClientLookupWindow(LookupWindow):
         self.client_listing, self.accounts = load_data()
 
         self.lookup_button.clicked.connect(self.on_lookup_client)
-        # self.client_number_edit.textChanged.connect(self.on_text_changed)
-        # self.account_table.cellClicked.connect(self.on_select_account)
+        self.client_number_edit.textChanged.connect(self.on_text_changed)
+        self.account_table.cellClicked.connect(self.on_select_account)
 
     @Slot()
     def on_lookup_client(self) -> None:
@@ -103,3 +103,56 @@ class ClientLookupWindow(LookupWindow):
         """
 
         self.account_table.setRowCount(0)
+
+    @Slot(int, int)
+    def on_select_account(self, row: int, column: int) -> None:
+        """
+        Slot for the account_table cellClicked signal
+
+        ValueError:
+                QMessageBox.warning: error message
+        """
+
+        item = self.account_table.item(row, 0)
+
+        if item is None:
+            QMessageBox.warning(
+                self, 
+                "Please select a valid record", 
+                "Please select a valid record"
+                )
+            return
+        
+        account_number_text = item.text().strip()
+
+        if account_number_text == "":
+            QMessageBox.warning(
+                self, 
+                "Please select a valid record",
+                "Please select a valid record"
+                )
+            return
+        
+        try:
+            account_number = int(account_number_text.replace(",", ""))
+
+        except ValueError:
+            QMessageBox.warning(
+                self, 
+                "Please select a valid record", 
+                "Please select a valid record"
+                )
+            return
+        
+        if account_number not in self.accounts:
+            QMessageBox.warning(
+                self,
+                "Bank Account Error",
+                "Bank Account selected does not Exists"
+            )
+            return
+        
+        selected_account = self.accounts[account_number]
+
+        details_window = AccountDetailsWindow(selected_account)
+        details_window.exec_()
