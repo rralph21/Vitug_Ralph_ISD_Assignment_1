@@ -4,24 +4,24 @@ __credits__ = ""
 
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
 from PySide6.QtCore import Qt
+from PySide6.QtCore import Slot
 
 from ui_superclasses.lookup_window import LookupWindow
 from user_interface.account_details_window import AccountDetailsWindow
 from user_interface.manage_data import load_data
 from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
-from .manage_data import load_data
 
 class ClientLookupWindow(LookupWindow):
     
     def __init__(self):
         super().__init__()
         
-    self.client_listing, self.accounts = load_data()
+        self.client_listing, self.accounts = load_data()
 
-    self.lookup_button.clicked.connect(self.on_lookup_client)
-    self.client_number_edit.textChange.connect(self.on_text_changed)
-    self.account_table.cellClicked.connect(self.on_select_account)
+        self.lookup_button.clicked.connect(self.on_lookup_client)
+        # self.client_number_edit.textChanged.connect(self.on_text_changed)
+        # self.account_table.cellClicked.connect(self.on_select_account)
 
     @Slot()
     def on_lookup_client(self) -> None:
@@ -94,3 +94,12 @@ class ClientLookupWindow(LookupWindow):
                 self.account_table.setItem(row, 3, account_type_item)
 
         self.account_table.resizeColumnsToContents()
+
+    @Slot()
+    def on_text_changed(self, text: str) -> None:
+        """
+        Slot for on_text_signal
+
+        """
+
+        self.account_table.setRowCount(0)
